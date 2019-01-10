@@ -1,5 +1,5 @@
 package com.ceiba.model;
 
-public class Parquedero {
+public class Parqueadero {
 
 }
