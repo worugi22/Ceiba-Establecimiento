@@ -3,6 +3,7 @@
  */
 package com.ceiba.estacionamiento.controller;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -40,7 +41,9 @@ public class VehiculoController {
 
 		Vehiculo vehiculo = new Vehiculo();
 		vehiculo.setPlacaVehiculo(placaVehiculo);
-		vehiculo.setFechaIngreso(fechaIngreso);
+		Date fecha = new Date();
+		//new Timestamp(fecha.getTime())
+		vehiculo.setFechaIngreso(new Timestamp(fecha.getTime()));
 		vehiculo.setCilindrajeVehiculo(cilindrajeVehiculo);
 		vehiculo.setIdestacionamiento(idestacionamiento);
 		vehiculo.setTipoVehiculo(tipoVehiculo);
