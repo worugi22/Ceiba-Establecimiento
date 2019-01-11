@@ -3,8 +3,14 @@
  */
 package com.ceiba.estacionamiento.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
+
 
 /**
  * @author wolsey.rubio
@@ -14,24 +20,24 @@ import javax.persistence.Table;
 @Table(name="vehiculo")
 public class Vehiculo {
 	
-	private Integer idVehiculo;
-	private Integer tipoVehiculo;
-	private String placaVehiculo;
-	private String horaSalida;
+	@Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+	private Integer idvehiculo;
 	
-	public Vehiculo(Integer idVehiculo, Integer tipoVehiculo, String placaVehiculo) {
-		super();
-		this.idVehiculo = idVehiculo;
-		this.tipoVehiculo = tipoVehiculo;
-		this.placaVehiculo = placaVehiculo;
+	private String placaVehiculo;
+	private Date fechaIngreso;
+	private Integer cilindrajeVehiculo;
+	
+	private Integer idestacionamiento;
+	private Integer tipoVehiculo;
+	
+	
+	public Integer getIdvehiculo() {
+		return idvehiculo;
 	}
 
-	public Integer getIdVehiculo() {
-		return idVehiculo;
-	}
-
-	public void setIdVehiculo(Integer idVehiculo) {
-		this.idVehiculo = idVehiculo;
+	public void setIdvehiculo(Integer idvehiculo) {
+		this.idvehiculo = idvehiculo;
 	}
 
 	public Integer getTipoVehiculo() {
@@ -42,6 +48,24 @@ public class Vehiculo {
 		this.tipoVehiculo = tipoVehiculo;
 	}
 
+	public Integer getCilindrajeVehiculo() {
+		return cilindrajeVehiculo;
+	}
+
+	public void setCilindrajeVehiculo(Integer cilindrajeVehiculo) {
+		this.cilindrajeVehiculo = cilindrajeVehiculo;
+	}
+
+
+
+	public Date getFechaIngreso() {
+		return fechaIngreso;
+	}
+
+	public void setFechaIngreso(Date fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
+	}
+
 	public String getPlacaVehiculo() {
 		return placaVehiculo;
 	}
@@ -50,18 +74,12 @@ public class Vehiculo {
 		this.placaVehiculo = placaVehiculo;
 	}
 
-	public String getHoraSalida() {
-		return horaSalida;
+	public Integer getIdestacionamiento() {
+		return idestacionamiento;
 	}
 
-	public void setHoraSalida(String horaSalida) {
-		this.horaSalida = horaSalida;
-	}
-
-	@Override
-	public String toString() {
-		return "Vehiculo [idVehiculo=" + idVehiculo + ", tipoVehiculo=" + tipoVehiculo + ", placaVehiculo="
-				+ placaVehiculo + ", horaSalida=" + horaSalida + "]";
+	public void setIdestacionamiento(Integer idestacionamiento) {
+		this.idestacionamiento = idestacionamiento;
 	}
 	
 	
