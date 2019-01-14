@@ -1,4 +1,4 @@
-package com.ceiba.ceibaestacionamiento;
+package com.example.demo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CeibaEstacionamientoApplicationTests {
+public class ProyectoPruebaApplicationTests {
 
 	@Test
 	public void contextLoads() {
