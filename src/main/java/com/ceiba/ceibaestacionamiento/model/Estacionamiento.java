@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ceiba.ceibaestacionamiento;
+package com.ceiba.ceibaestacionamiento.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

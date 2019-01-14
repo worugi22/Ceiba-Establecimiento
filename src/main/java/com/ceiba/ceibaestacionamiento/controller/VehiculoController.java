@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ceiba.ceibaestacionamiento;
+package com.ceiba.ceibaestacionamiento.controller;
 
 import java.util.Optional;
 
@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.ceiba.ceibaestacionamiento.model.Vehiculo;
+import com.ceiba.ceibaestacionamiento.service.VehiculoService;
 
 /**
  * @author wolsey.rubio
