@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ceiba.ceibaestacionamiento.model.Vehiculo;
-import com.ceiba.ceibaestacionamiento.service.IVehiculoService;
+import com.ceiba.ceibaestacionamiento.services.IVehiculoService;
 
 /**
  * @author wolsey.rubio
