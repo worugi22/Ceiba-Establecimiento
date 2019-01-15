@@ -3,10 +3,11 @@
  */
 package com.ceiba.ceibaestacionamiento.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author wolsey.rubio
@@ -14,34 +15,35 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class Estacionamiento {
-	
+@Table(name="estacionamiento")
+public class Estacionamiento implements Serializable{
+
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer idestacionamiento;
 	
-	private Integer tipoVehiculo;
-
+	private Integer tipovehiculo;
+	private Integer capacidadvehiculos;
 	public Integer getIdestacionamiento() {
 		return idestacionamiento;
 	}
-
 	public void setIdestacionamiento(Integer idestacionamiento) {
 		this.idestacionamiento = idestacionamiento;
 	}
-
-	public Integer getTipoVehiculo() {
-		return tipoVehiculo;
+	public Integer getTipovehiculo() {
+		return tipovehiculo;
+	}
+	public void setTipovehiculo(Integer tipovehiculo) {
+		this.tipovehiculo = tipovehiculo;
+	}
+	public Integer getCapacidadvehiculos() {
+		return capacidadvehiculos;
+	}
+	public void setCapacidadvehiculos(Integer capacidadvehiculos) {
+		this.capacidadvehiculos = capacidadvehiculos;
 	}
 
-	public void setTipoVehiculo(Integer tipoVehiculo) {
-		this.tipoVehiculo = tipoVehiculo;
-	}
-
-	@Override
-	public String toString() {
-		return "Estacionamiento [idestacionamiento=" + idestacionamiento + ", tipoVehiculo=" + tipoVehiculo + "]";
-	}
+	private static final long serialVersionUID = 1L;
 	
 	
 }

@@ -1,0 +1,8 @@
+INSERT INTO vehiculo (cilindrajevehiculo, fechaingreso, fechasalida, idestacionamiento, placavehiculo, tipovehiculo) VALUES('300', '2019-01-23 12:23:22', '2019-01-23 12:23:22', '2', 'ABS213', '2')
+INSERT INTO vehiculo (cilindrajevehiculo, fechaingreso, fechasalida, idestacionamiento, placavehiculo, tipovehiculo) VALUES('500', '2019-01-23 12:23:22', '2019-01-23 12:23:22', '2', 'DFD353', '2')
+INSERT INTO vehiculo (cilindrajevehiculo, fechaingreso, fechasalida, idestacionamiento, placavehiculo, tipovehiculo) VALUES('1000', '2019-01-23 12:23:22', '2019-01-23 12:23:22', '2', 'GFS453', '2')
+INSERT INTO vehiculo (cilindrajevehiculo, fechaingreso, fechasalida, idestacionamiento, placavehiculo, tipovehiculo) VALUES('5000', '2019-01-23 12:23:22', '2019-01-23 12:23:22', '1', 'JKH545', '1')
+INSERT INTO vehiculo (cilindrajevehiculo, fechaingreso, fechasalida, idestacionamiento, placavehiculo, tipovehiculo) VALUES('100', '2019-01-23 12:23:22', '2019-01-23 12:23:22', '1', 'OPI343', '1')
+INSERT INTO vehiculo (cilindrajevehiculo, fechaingreso, fechasalida, idestacionamiento, placavehiculo, tipovehiculo) VALUES('500', '2019-01-23 12:23:22', '2019-01-23 12:23:22', '2', 'KJG756', '2')
+INSERT INTO vehiculo (cilindrajevehiculo, fechaingreso, fechasalida, idestacionamiento, placavehiculo, tipovehiculo) VALUES('600', '2019-01-23 12:23:22', '2019-01-23 12:23:22', '1', 'RTE343', '1')
+INSERT INTO vehiculo (cilindrajevehiculo, fechaingreso, fechasalida, idestacionamiento, placavehiculo, tipovehiculo) VALUES('300', '2019-01-23 12:23:22', '2019-01-23 12:23:22', '2', 'FDD354', '2')
