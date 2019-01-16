@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -40,6 +41,7 @@ public class Vehiculo implements Serializable{
 	private Integer cilindrajevehiculo;
 	private Integer idestacionamiento;
 	private Integer tipovehiculo;
+	private Boolean estado;
 	
 	@PrePersist
 	public void prePersist() {
@@ -102,6 +104,14 @@ public class Vehiculo implements Serializable{
 		this.tipovehiculo = tipovehiculo;
 	}
 	
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+
 	private static final long serialVersionUID = 1L;
 
 }

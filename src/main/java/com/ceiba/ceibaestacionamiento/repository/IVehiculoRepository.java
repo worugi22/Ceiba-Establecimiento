@@ -17,8 +17,10 @@ import com.ceiba.ceibaestacionamiento.model.Vehiculo;
 public interface IVehiculoRepository extends CrudRepository<Vehiculo, Serializable>{
 	
 	List<Vehiculo> findAll();
+	List<Vehiculo> findByTipovehiculoAndEstado(Integer tipovehiculo, Boolean estado);
 	Vehiculo findByIdvehiculo(Integer idvehiculo);
 	Vehiculo findByPlacavehiculo(String placavehiculo);
 	Vehiculo deleteByPlacavehiculo(String placavehiculo);
+	
 	
 }

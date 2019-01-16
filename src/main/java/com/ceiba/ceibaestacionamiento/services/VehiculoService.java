@@ -19,9 +19,42 @@ import com.ceiba.ceibaestacionamiento.model.Vehiculo;
 @Service
 public class VehiculoService{
 	
-	@Autowired // Inyectar el cliente DAO
+	@Autowired // Inyectar el Repository.
 	private IVehiculoRepository vehiculoRepository;
 	
+	//Tipos de vehiculos que pueden ingresar.
+	static final int CARRO = 1;
+	static final int MOTO = 2;
+//	
+	public List<Vehiculo> findByTipovehiculoAndEstado(Integer tipovehiculo, Boolean estado) {
+		return vehiculoRepository.findByTipovehiculoAndEstado(tipovehiculo,estado);
+	}
+//	
+	//private int  carrosParqeados = findByTipovehiculoAndEstado(1,true).size();
+	//private int  motosParqeadas = findByTipovehiculoAndEstado(2,true).size();
+	
+	//Reigistrar ingreso vihiculo parquiadero
+	@Transactional
+	public Vehiculo registrarVehiculo(Vehiculo vehiculo) {
+		
+		if(findByTipovehiculoAndEstado(MOTO,true).size() < 10 && vehiculo.getTipovehiculo() == MOTO ) {
+			return vehiculoRepository.save(vehiculo);
+		}
+		
+		if(findByTipovehiculoAndEstado(CARRO,true).size() < 20 && vehiculo.getTipovehiculo() == CARRO ) {
+			return vehiculoRepository.save(vehiculo);
+		}
+		
+		return null;
+	}
+	
+	
+//	@Transactional(readOnly = true) // Permite hacer transaciones. se puede omitir viene en el CrupRepository
+//	public List<Vehiculo> findByTipovehiculoAndEstado(Integer tipovehiculo, Boolean estado) {
+//		return vehiculoRepository.findByTipovehiculoAndEstado(tipovehiculo,estado);
+//	}
+//	
+
 	@Transactional(readOnly = true) // Permite hacer transaciones. se puede omitir viene en el CrupRepository
 	public List<Vehiculo> findAll() {
 		return vehiculoRepository.findAll();
@@ -47,12 +80,13 @@ public class VehiculoService{
 		vehiculoRepository.deleteByPlacavehiculo(placavehiuclo);
 	}
 	
-	@Transactional
-	public Vehiculo registrarVehiculo(Vehiculo vehiculo) {
-		return vehiculoRepository.save(vehiculo);
-	}
+
 	
-	// Logica de negocio
+	// Business Logic
+	
+	
+	
+	
 
 
 }

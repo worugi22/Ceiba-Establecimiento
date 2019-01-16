@@ -31,15 +31,20 @@ permitidos, cabezeras permitidas. si no se indica el parametro los deja habilida
 @CrossOrigin(origins= {"http://localhost:4200"})
 @RestController
 @RequestMapping("/estacionamiento")
-public class VehiculoController {
+public class VehiculoRestController {
 	
-	// Se inyecta el servicio
-	@Autowired
+	
+	@Autowired // Se inyecta el servicio
 	private VehiculoService vehiculoService;
 	
 	@GetMapping("/vehiculos")
 	public List<Vehiculo> index(){
 		return vehiculoService.findAll();
+	}
+	
+	@GetMapping("/vehiculos/parqueados")
+	public int show(){
+		return vehiculoService.findByTipovehiculoAndEstado(2, true).size();
 	}
 	
 	@GetMapping("/vehiculos/id/{idvehiculo}")
