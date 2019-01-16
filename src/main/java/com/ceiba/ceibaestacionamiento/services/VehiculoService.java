@@ -38,14 +38,21 @@ public class VehiculoService{
 	}
 
 	@Transactional
-	public Vehiculo save(Vehiculo vehiculo) {
-		return vehiculoRepository.save(vehiculo);
-	}
-
-	@Transactional
 	public void deleteById(Integer idvehiculo) {
 		vehiculoRepository.deleteById(idvehiculo);
 	}
+	
+	@Transactional
+	public void deleteByPlacavehiculo(String placavehiuclo) {
+		vehiculoRepository.deleteByPlacavehiculo(placavehiuclo);
+	}
+	
+	@Transactional
+	public Vehiculo registrarVehiculo(Vehiculo vehiculo) {
+		return vehiculoRepository.save(vehiculo);
+	}
+	
+	// Logica de negocio
 
 
 }

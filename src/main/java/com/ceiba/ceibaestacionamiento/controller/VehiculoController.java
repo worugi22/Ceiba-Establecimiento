@@ -55,29 +55,35 @@ public class VehiculoController {
 	@PostMapping("/vehiculos")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Vehiculo create(@RequestBody Vehiculo vehiculo) {
-		return vehiculoService.save(vehiculo);
+		return vehiculoService.registrarVehiculo(vehiculo);
 	}
 	
 	@PutMapping("/vehiculos/{idvehiculo}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Vehiculo update(@RequestBody Vehiculo vehiculo, @PathVariable Integer idvehiculo) {
-		Vehiculo currentVehiculo = this.vehiculoService.findByIdvehiculo(idvehiculo);
+		Vehiculo vehiculoActual = this.vehiculoService.findByIdvehiculo(idvehiculo);
 		
-		currentVehiculo.setIdvehiculo(vehiculo.getIdvehiculo());
-		currentVehiculo.setFechaingreso(vehiculo.getFechaingreso());
-		currentVehiculo.setFechasalida(vehiculo.getFechasalida());
-		currentVehiculo.setCilindrajevehiculo(vehiculo.getCilindrajevehiculo());
-		currentVehiculo.setIdestacionamiento(vehiculo.getIdestacionamiento());
-		currentVehiculo.setTipovehiculo(vehiculo.getTipovehiculo());
+		vehiculoActual.setIdvehiculo(vehiculo.getIdvehiculo());
+		vehiculoActual.setFechaingreso(vehiculo.getFechaingreso());
+		vehiculoActual.setFechasalida(vehiculo.getFechasalida());
+		vehiculoActual.setCilindrajevehiculo(vehiculo.getCilindrajevehiculo());
+		vehiculoActual.setIdestacionamiento(vehiculo.getIdestacionamiento());
+		vehiculoActual.setTipovehiculo(vehiculo.getTipovehiculo());
 		
-		this.vehiculoService.save(currentVehiculo);
-		return currentVehiculo;
+		this.vehiculoService.registrarVehiculo(vehiculoActual);
+		return vehiculoActual;
 	}
 
-	@DeleteMapping("/vehiculos/{idvehiculo}")
+	@DeleteMapping("/vehiculos/id/{idvehiculo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Integer idvehiculo) {
 		vehiculoService.deleteById(idvehiculo);
+	}
+	
+	@DeleteMapping("/vehiculos/placa/{placavehiculo}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable String placavehiculo) {
+		vehiculoService.deleteByPlacavehiculo(placavehiculo);
 	}
 	
 	
