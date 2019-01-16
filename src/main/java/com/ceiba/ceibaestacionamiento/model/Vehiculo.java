@@ -25,11 +25,10 @@ import javax.persistence.TemporalType;
 public class Vehiculo implements Serializable{
 	
 	@Id
-	private String placavehiculo;
-	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idvehiculo;
 	
+	private String placavehiculo;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaingreso;

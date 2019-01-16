@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ceiba.ceibaestacionamiento.model.Vehiculo;
-import com.ceiba.ceibaestacionamiento.services.IVehiculoService;
+import com.ceiba.ceibaestacionamiento.services.VehiculoService;
 
 /**
  * @author wolsey.rubio
@@ -31,20 +31,25 @@ permitidos, cabezeras permitidas. si no se indica el parametro los deja habilida
 @CrossOrigin(origins= {"http://localhost:4200"})
 @RestController
 @RequestMapping("/estacionamiento")
-public class VehiculoRestController {
+public class VehiculoController {
 	
 	// Se inyecta el servicio
 	@Autowired
-	private IVehiculoService vehiculoService;
+	private VehiculoService vehiculoService;
 	
 	@GetMapping("/vehiculos")
 	public List<Vehiculo> index(){
 		return vehiculoService.findAll();
 	}
 	
-	@GetMapping("/vehiculos/{placavehiculo}")
+	@GetMapping("/vehiculos/id/{idvehiculo}")
+	public Vehiculo show(@PathVariable Integer idvehiculo) {
+		return vehiculoService.findByIdvehiculo(idvehiculo);
+	}
+	
+	@GetMapping("/vehiculos/placa/{placavehiculo}")
 	public Vehiculo show(@PathVariable String placavehiculo) {
-		return vehiculoService.findById(placavehiculo);
+		return vehiculoService.findByPlacavehiculo(placavehiculo);
 	}
 	
 	@PostMapping("/vehiculos")
@@ -53,10 +58,10 @@ public class VehiculoRestController {
 		return vehiculoService.save(vehiculo);
 	}
 	
-	@PutMapping("/vehiculos/{placavehiculo}")
+	@PutMapping("/vehiculos/{idvehiculo}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Vehiculo update(@RequestBody Vehiculo vehiculo, @PathVariable String placavehiculo) {
-		Vehiculo currentVehiculo = this.vehiculoService.findById(placavehiculo);
+	public Vehiculo update(@RequestBody Vehiculo vehiculo, @PathVariable Integer idvehiculo) {
+		Vehiculo currentVehiculo = this.vehiculoService.findByIdvehiculo(idvehiculo);
 		
 		currentVehiculo.setIdvehiculo(vehiculo.getIdvehiculo());
 		currentVehiculo.setFechaingreso(vehiculo.getFechaingreso());
@@ -69,10 +74,10 @@ public class VehiculoRestController {
 		return currentVehiculo;
 	}
 
-	@DeleteMapping("/vehiculos/{placavehiculo}")
+	@DeleteMapping("/vehiculos/{idvehiculo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable String placavehiculo) {
-		vehiculoService.delete(placavehiculo);
+	public void delete(@PathVariable Integer idvehiculo) {
+		vehiculoService.deleteById(idvehiculo);
 	}
 	
 	

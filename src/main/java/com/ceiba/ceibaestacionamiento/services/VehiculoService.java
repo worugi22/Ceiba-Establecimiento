@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ceiba.ceibaestacionamiento.repository.IVehiculoDao;
+import com.ceiba.ceibaestacionamiento.repository.IVehiculoRepository;
 import com.ceiba.ceibaestacionamiento.model.Vehiculo;
 
 /**
@@ -17,33 +17,34 @@ import com.ceiba.ceibaestacionamiento.model.Vehiculo;
  */
 
 @Service
-public class VehiculoServiceImpl implements IVehiculoService{
+public class VehiculoService{
 	
 	@Autowired // Inyectar el cliente DAO
-	private IVehiculoDao vehiculoDao;
+	private IVehiculoRepository vehiculoRepository;
 	
-	@Override
 	@Transactional(readOnly = true) // Permite hacer transaciones. se puede omitir viene en el CrupRepository
 	public List<Vehiculo> findAll() {
-		return (List<Vehiculo>) vehiculoDao.findAll();
+		return vehiculoRepository.findAll();
 	}
 	
-	@Override
 	@Transactional(readOnly = true) 
-	public Vehiculo findById(String placavehiculo) {
-		return vehiculoDao.findById(placavehiculo).orElse(null);
+	public Vehiculo findByIdvehiculo(Integer idvehiculo) {
+		return vehiculoRepository.findByIdvehiculo(idvehiculo);
+	}
+	
+	@Transactional(readOnly = true) 
+	public Vehiculo findByPlacavehiculo(String placavehiculo) {
+		return vehiculoRepository.findByPlacavehiculo(placavehiculo);
 	}
 
-	@Override
 	@Transactional
 	public Vehiculo save(Vehiculo vehiculo) {
-		return vehiculoDao.save(vehiculo);
+		return vehiculoRepository.save(vehiculo);
 	}
 
-	@Override
 	@Transactional
-	public void delete(String idvehiculo) {
-		vehiculoDao.deleteById(idvehiculo);
+	public void deleteById(Integer idvehiculo) {
+		vehiculoRepository.deleteById(idvehiculo);
 	}
 
 
