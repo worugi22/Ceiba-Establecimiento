@@ -78,26 +78,38 @@ public class VehiculoService{
 		return VehiculoDTO.getInstanceList(lista);
 	}
 	
+	//TERMINAR --->>>>
+	@Transactional(readOnly = true) // Permite hacer transaciones. se puede omitir viene en el CrupRepository
+	public List<Vehiculo> consultarVehiculoEstacionado(String placavehidulo, Boolean estado) {
+		return vehiculoRepository.findAllByPlacavehiculoAndEstado(placavehidulo, estado);
+	}
+	
+	@Transactional(readOnly = true) // Permite hacer transaciones. se puede omitir viene en el CrupRepository
+	public Vehiculo consultarVehiculoEstacionado1(String placavehidulo, Boolean estado) {
+		return vehiculoRepository.findByPlacavehiculoAndEstado(placavehidulo, estado);
+	}
+	
 	@Transactional(readOnly = true) 
 	public Vehiculo findByIdvehiculo(Integer idvehiculo) {
 		return vehiculoRepository.findByIdvehiculo(idvehiculo);
 	}
+	
 	
 	@Transactional(readOnly = true) 
 	public Vehiculo findByPlacavehiculo(String placavehiculo) {
 		return vehiculoRepository.findByPlacavehiculo(placavehiculo);
 	}
 
-	@Transactional
-	public void deleteById(Integer idvehiculo) {
-		vehiculoRepository.deleteById(idvehiculo);
-	}
-	
-	@Transactional
-	public void deleteByPlacavehiculo(String placavehiuclo) {
-		vehiculoRepository.deleteByPlacavehiculo(placavehiuclo);
-	}
-	
+//	@Transactional
+//	public void deleteById(Integer idvehiculo) {
+//		vehiculoRepository.deleteById(idvehiculo);
+//	}
+//	
+//	@Transactional
+//	public void deleteByPlacavehiculo(String placavehiuclo) {
+//		vehiculoRepository.deleteByPlacavehiculo(placavehiuclo);
+//	}
+//	
 
 	
 	// Business Logic

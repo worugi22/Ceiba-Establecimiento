@@ -58,7 +58,7 @@ public class Vehiculo implements Serializable{
 	public String getPlacavehiculo() {
 		return placavehiculo;
 	}
-
+	
 	public void setPlacavehiculo(String placavehiculo) {
 		this.placavehiculo = placavehiculo;
 	}

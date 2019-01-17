@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.ceiba.ceibaestacionamiento.model.Vehiculo;
 
 /**
- * @author wolsey.rubio
+ * @author wolsey.rubio 
  *
  */
 
@@ -20,6 +20,8 @@ public interface IVehiculoRepository extends JpaRepository<Vehiculo, Serializabl
 	List<Vehiculo> findAll();
 	List<Vehiculo> findByTipovehiculoAndEstado(String tipovehiculo, Boolean estado);
 	List<Vehiculo> findByEstado(Boolean estado);
+	List<Vehiculo> findAllByPlacavehiculoAndEstado(String placavehiculo, Boolean estado);
+	Vehiculo findByPlacavehiculoAndEstado(String placavehiculo, Boolean estado);
 	Vehiculo findByIdvehiculo(Integer idvehiculo);
 	Vehiculo findByPlacavehiculo(String placavehiculo);
 	Vehiculo deleteByPlacavehiculo(String placavehiculo);
