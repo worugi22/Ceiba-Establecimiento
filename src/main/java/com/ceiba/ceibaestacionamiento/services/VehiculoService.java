@@ -3,12 +3,16 @@
  */
 package com.ceiba.ceibaestacionamiento.services;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ceiba.ceibaestacionamiento.repository.IVehiculoRepository;
+import com.ceiba.ceibaestacionamiento.dto.VehiculoDTO;
 import com.ceiba.ceibaestacionamiento.model.Vehiculo;
 
 /**
@@ -23,41 +27,55 @@ public class VehiculoService{
 	private IVehiculoRepository vehiculoRepository;
 	
 	//Tipos de vehiculos que pueden ingresar.
-	static final int CARRO = 1;
-	static final int MOTO = 2;
-//	
-	public List<Vehiculo> findByTipovehiculoAndEstado(Integer tipovehiculo, Boolean estado) {
+	static final String CARRO = "carro";
+	static final String MOTO = "moto";
+	
+	static final Integer DOMINGO = 1;
+	static final Integer LUNES = 2;
+	
+
+	public List<Vehiculo> findByTipovehiculoAndEstado(String tipovehiculo, Boolean estado) {
 		return vehiculoRepository.findByTipovehiculoAndEstado(tipovehiculo,estado);
 	}
-//	
-	//private int  carrosParqeados = findByTipovehiculoAndEstado(1,true).size();
-	//private int  motosParqeadas = findByTipovehiculoAndEstado(2,true).size();
 	
-	//Reigistrar ingreso vihiculo parquiadero
+	Vehiculo vehiculo;
+	
+	Date now = new Date();
+    Calendar calendar = Calendar.getInstance();
+    int dia = calendar.get(Calendar.DAY_OF_WEEK);
+   
+ 
+	public boolean isValidoIngreso() {
+		boolean value = false;
+		if( (dia != LUNES || dia != DOMINGO)) {
+			if(!(vehiculo.getPlacavehiculo().substring(0).toLowerCase().startsWith("a")))
+				value = true;
+		}
+		return value;
+	}
+
+
 	@Transactional
 	public Vehiculo registrarVehiculo(Vehiculo vehiculo) {
-		
-		if(findByTipovehiculoAndEstado(MOTO,true).size() < 10 && vehiculo.getTipovehiculo() == MOTO ) {
-			return vehiculoRepository.save(vehiculo);
-		}
-		
-		if(findByTipovehiculoAndEstado(CARRO,true).size() < 20 && vehiculo.getTipovehiculo() == CARRO ) {
-			return vehiculoRepository.save(vehiculo);
-		}
-		
+			if(findByTipovehiculoAndEstado(CARRO,true).size() < 20 && vehiculo.getTipovehiculo().equals(CARRO)) 
+				return vehiculoRepository.save(vehiculo);
+			
+			if(findByTipovehiculoAndEstado(MOTO,true).size() < 10 && vehiculo.getTipovehiculo().equals(MOTO)) 
+				return vehiculoRepository.save(vehiculo);
+
 		return null;
 	}
 	
-	
-//	@Transactional(readOnly = true) // Permite hacer transaciones. se puede omitir viene en el CrupRepository
-//	public List<Vehiculo> findByTipovehiculoAndEstado(Integer tipovehiculo, Boolean estado) {
-//		return vehiculoRepository.findByTipovehiculoAndEstado(tipovehiculo,estado);
-//	}
-//	
 
 	@Transactional(readOnly = true) // Permite hacer transaciones. se puede omitir viene en el CrupRepository
 	public List<Vehiculo> findAll() {
 		return vehiculoRepository.findAll();
+	}
+	
+	@Transactional(readOnly = true) // Permite hacer transaciones. se puede omitir viene en el CrupRepository
+	public List<VehiculoDTO> consultarVehiculosEstacionados(Boolean estado) {
+		List<Vehiculo> lista = vehiculoRepository.findByEstado(estado);
+		return VehiculoDTO.getInstanceList(lista);
 	}
 	
 	@Transactional(readOnly = true) 

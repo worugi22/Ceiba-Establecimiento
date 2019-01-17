@@ -30,18 +30,17 @@ public class Vehiculo implements Serializable{
 	private Integer idvehiculo;
 	
 	private String placavehiculo;
-	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaingreso;
-	
-	@Temporal(TemporalType.TIMESTAMP)
+
 	private Date fechasalida;
 	
 	// @Column(name="") // Si tiene el mismo nombre de la base de datos no se utiliza.
 	private Integer cilindrajevehiculo;
 	private Integer idestacionamiento;
-	private Integer tipovehiculo;
+	private String tipovehiculo;
 	private Boolean estado;
+	private Double costo;
 	
 	@PrePersist
 	public void prePersist() {
@@ -96,11 +95,11 @@ public class Vehiculo implements Serializable{
 		this.idestacionamiento = idestacionamiento;
 	}
 
-	public Integer getTipovehiculo() {
+	public String getTipovehiculo() {
 		return tipovehiculo;
 	}
 
-	public void setTipovehiculo(Integer tipovehiculo) {
+	public void setTipovehiculo(String tipovehiculo) {
 		this.tipovehiculo = tipovehiculo;
 	}
 	
@@ -110,6 +109,14 @@ public class Vehiculo implements Serializable{
 
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
+	}
+
+	public Double getCosto() {
+		return costo;
+	}
+
+	public void setCosto(Double costo) {
+		this.costo = costo;
 	}
 
 	private static final long serialVersionUID = 1L;

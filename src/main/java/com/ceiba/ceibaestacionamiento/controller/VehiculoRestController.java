@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ceiba.ceibaestacionamiento.dto.VehiculoDTO;
 import com.ceiba.ceibaestacionamiento.model.Vehiculo;
 import com.ceiba.ceibaestacionamiento.services.VehiculoService;
 
@@ -43,8 +44,8 @@ public class VehiculoRestController {
 	}
 	
 	@GetMapping("/vehiculos/parqueados")
-	public int show(){
-		return vehiculoService.findByTipovehiculoAndEstado(2, true).size();
+	public List<VehiculoDTO> show(){
+		return vehiculoService.consultarVehiculosEstacionados(true);
 	}
 	
 	@GetMapping("/vehiculos/id/{idvehiculo}")
@@ -57,16 +58,33 @@ public class VehiculoRestController {
 		return vehiculoService.findByPlacavehiculo(placavehiculo);
 	}
 	
-	@PostMapping("/vehiculos")
+	@PostMapping("/vehiculos/registrar/ingreso")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Vehiculo create(@RequestBody Vehiculo vehiculo) {
 		return vehiculoService.registrarVehiculo(vehiculo);
 	}
 	
-	@PutMapping("/vehiculos/{idvehiculo}")
+	
+//	@PutMapping("/vehiculos/{idvehiculo}")
+//	@ResponseStatus(HttpStatus.CREATED)
+//	public Vehiculo update(@RequestBody Vehiculo vehiculo, @PathVariable Integer idvehiculo) {
+//		Vehiculo vehiculoActual = this.vehiculoService.findByIdvehiculo(idvehiculo);
+//		
+//		vehiculoActual.setIdvehiculo(vehiculo.getIdvehiculo());
+//		vehiculoActual.setFechaingreso(vehiculo.getFechaingreso());
+//		vehiculoActual.setFechasalida(vehiculo.getFechasalida());
+//		vehiculoActual.setCilindrajevehiculo(vehiculo.getCilindrajevehiculo());
+//		vehiculoActual.setIdestacionamiento(vehiculo.getIdestacionamiento());
+//		vehiculoActual.setTipovehiculo(vehiculo.getTipovehiculo());
+//		
+//		this.vehiculoService.registrarVehiculo(vehiculoActual);
+//		return vehiculoActual;
+//	}
+
+	@PutMapping("/vehiculos/{placavehiculo}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Vehiculo update(@RequestBody Vehiculo vehiculo, @PathVariable Integer idvehiculo) {
-		Vehiculo vehiculoActual = this.vehiculoService.findByIdvehiculo(idvehiculo);
+	public Vehiculo update(@RequestBody Vehiculo vehiculo, @PathVariable String placavehiculo) {
+		Vehiculo vehiculoActual = this.vehiculoService.findByPlacavehiculo(placavehiculo);
 		
 		vehiculoActual.setIdvehiculo(vehiculo.getIdvehiculo());
 		vehiculoActual.setFechaingreso(vehiculo.getFechaingreso());
@@ -78,7 +96,7 @@ public class VehiculoRestController {
 		this.vehiculoService.registrarVehiculo(vehiculoActual);
 		return vehiculoActual;
 	}
-
+	
 	@DeleteMapping("/vehiculos/id/{idvehiculo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Integer idvehiculo) {
