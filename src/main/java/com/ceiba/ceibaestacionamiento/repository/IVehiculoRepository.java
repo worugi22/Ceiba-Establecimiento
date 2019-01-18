@@ -24,7 +24,7 @@ public interface IVehiculoRepository extends JpaRepository<Vehiculo, Serializabl
 	Vehiculo findByPlacavehiculoAndEstado(String placavehiculo, Boolean estado);
 	Vehiculo findByIdvehiculo(Integer idvehiculo);
 	Vehiculo findByPlacavehiculo(String placavehiculo);
-	Vehiculo deleteByPlacavehiculo(String placavehiculo);
+	//Vehiculo deleteByPlacavehiculo(String placavehiculo);
 	
 	
 }

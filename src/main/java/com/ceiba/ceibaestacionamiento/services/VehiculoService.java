@@ -33,18 +33,13 @@ public class VehiculoService{
 	static final Integer DOMINGO = 1;
 	static final Integer LUNES = 2;
 	
-
-	public List<Vehiculo> findByTipovehiculoAndEstado(String tipovehiculo, Boolean estado) {
-		return vehiculoRepository.findByTipovehiculoAndEstado(tipovehiculo,estado);
-	}
-	
 	Vehiculo vehiculo;
-	
+
 	Date now = new Date();
     Calendar calendar = Calendar.getInstance();
     int dia = calendar.get(Calendar.DAY_OF_WEEK);
-   
- 
+    
+
 	public boolean isValidoIngreso() {
 		boolean value = false;
 		if( (dia != LUNES || dia != DOMINGO)) {
@@ -53,7 +48,11 @@ public class VehiculoService{
 		}
 		return value;
 	}
-
+	
+	public List<Vehiculo> findByTipovehiculoAndEstado(String tipovehiculo, Boolean estado) {
+		return vehiculoRepository.findByTipovehiculoAndEstado(tipovehiculo,estado);
+	}
+ 
 
 	@Transactional
 	public Vehiculo registrarVehiculo(Vehiculo vehiculo) {

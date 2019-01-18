@@ -30,7 +30,7 @@ import com.ceiba.ceibaestacionamiento.services.VehiculoService;
 /* Con esta linea @CrossOrigin(origins= {"http://localhost:4200"}), se da acceso a este dominio para que pueda enviar y recibir datos, designar metodos
 permitidos, cabezeras permitidas. si no se indica el parametro los deja habilidatos todos*/
 
-@CrossOrigin(origins= {"http://localhost:4200"})
+@CrossOrigin(origins= {"http://localhost:4200"}) // conexion con front End
 @RestController
 @RequestMapping("/estacionamiento")
 public class VehiculoRestController {

@@ -4,11 +4,8 @@
 package com.ceiba.ceibaestacionamiento.costoparqueaderotest;
 
 import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
-
-import com.ceiba.ceibaestacionamiento.services.CostoParqueoCarro;
-import com.ceiba.ceibaestacionamiento.services.CostoParqueoMoto;
+import com.ceiba.ceibaestacionamiento.services.SalidaEstacionamientoCeiba;
 
 /**
  * @author wolsey.rubio
@@ -16,14 +13,13 @@ import com.ceiba.ceibaestacionamiento.services.CostoParqueoMoto;
  */
 public class CostoParqueaderoTest  {
 	
-	CostoParqueoCarro costoParqueaderoCarro = new CostoParqueoCarro(); 
-	CostoParqueoMoto costoParqueaderoMoto = new CostoParqueoMoto(); 
+	SalidaEstacionamientoCeiba salidaEstacionamientoCeiba = new SalidaEstacionamientoCeiba(); 
 	
 	@Test
 	public void verificarCostoParqueoCarro() {
 		final Integer HORAS = 3; 
 		final Integer DIAS = 1; 
-		Double costo = costoParqueaderoCarro.calcularPrecio(HORAS, DIAS);
+		Double costo = salidaEstacionamientoCeiba.calcularPrecioCarro(HORAS, DIAS);
 		Double resul = (double) 11_000;
 		assertEquals(costo,resul);
 	}
@@ -32,7 +28,7 @@ public class CostoParqueaderoTest  {
 	public void verificarCostoParqueoCarroCeroHoras() {
 		final Integer HORAS = 0; 
 		final Integer DIAS = 5; 
-		Double costo = costoParqueaderoCarro.calcularPrecio(HORAS, DIAS);
+		Double costo = salidaEstacionamientoCeiba.calcularPrecioCarro(HORAS, DIAS);
 		Double resul = (double) 40_000;
 		assertEquals(costo,resul);
 	}
@@ -41,12 +37,10 @@ public class CostoParqueaderoTest  {
 	public void verificarCostoParqueoCarroCeroDias() {
 		final Integer HORAS = 9; 
 		final Integer DIAS = 0; 
-		Double costo = costoParqueaderoCarro.calcularPrecio(HORAS, DIAS);
+		Double costo = salidaEstacionamientoCeiba.calcularPrecioCarro(HORAS, DIAS);
 		Double resul = (double) 8_000;
 		assertEquals(costo,resul);
 	}
-	
-	
 	
 	
 	@Test
@@ -54,7 +48,7 @@ public class CostoParqueaderoTest  {
 		final Integer HORAS = 1; 
 		final Integer DIAS = 2; 
 		final Integer CILINDRAJE = 600; 
-		Double costo = costoParqueaderoMoto.calcularPrecio(HORAS, DIAS, CILINDRAJE);
+		Double costo = salidaEstacionamientoCeiba.calcularPrecioMoto(HORAS, DIAS, CILINDRAJE);
 		Double resul = (double) 10_500;
 		assertEquals(costo,resul);
 	}
@@ -64,7 +58,7 @@ public class CostoParqueaderoTest  {
 		final Integer HORAS = 0; 
 		final Integer DIAS = 30; 
 		final Integer CILINDRAJE = 500; 
-		Double costo = costoParqueaderoMoto.calcularPrecio(HORAS, DIAS, CILINDRAJE);
+		Double costo = salidaEstacionamientoCeiba.calcularPrecioMoto(HORAS, DIAS, CILINDRAJE);
 		Double resul = (double) 120_000;
 		assertEquals(costo,resul);
 	}
@@ -74,7 +68,7 @@ public class CostoParqueaderoTest  {
 		final Integer HORAS = 100; 
 		final Integer DIAS = 0; 
 		final Integer CILINDRAJE = 1000; 
-		Double costo = costoParqueaderoMoto.calcularPrecio(HORAS, DIAS, CILINDRAJE);
+		Double costo = salidaEstacionamientoCeiba.calcularPrecioMoto(HORAS, DIAS, CILINDRAJE);
 		Double resul = (double) 52_000;
 		assertEquals(costo,resul);
 	}
