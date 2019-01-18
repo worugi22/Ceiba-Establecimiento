@@ -99,16 +99,7 @@ public class VehiculoService{
 		return vehiculoRepository.findByPlacavehiculo(placavehiculo);
 	}
 
-//	@Transactional
-//	public void deleteById(Integer idvehiculo) {
-//		vehiculoRepository.deleteById(idvehiculo);
-//	}
-//	
-//	@Transactional
-//	public void deleteByPlacavehiculo(String placavehiuclo) {
-//		vehiculoRepository.deleteByPlacavehiculo(placavehiuclo);
-//	}
-//	
+	
 
 	
 	// Business Logic

@@ -1,6 +1,6 @@
 package com.ceiba.ceibaestacionamiento.services;
 
-import com.ceiba.ceibaestacionamiento.model.Vehiculo;
+
 
 /**
  * @author wolsey.rubio
@@ -64,6 +64,8 @@ public class SalidaEstacionamientoCeiba {
 		return precio;
 		
 	} 
+	
+	
 	
 	
 	

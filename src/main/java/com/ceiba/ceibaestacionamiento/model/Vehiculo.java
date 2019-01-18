@@ -5,7 +5,6 @@ package com.ceiba.ceibaestacionamiento.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,19 +29,18 @@ public class Vehiculo implements Serializable{
 	private Integer idvehiculo;
 	
 	private String placavehiculo;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaingreso;
-
-	private Date fechasalida;
 	
-	// @Column(name="") // Si tiene el mismo nombre de la base de datos no se utiliza.
+	private Date fechasalida;
 	private Integer cilindrajevehiculo;
 	private Integer idestacionamiento;
 	private String tipovehiculo;
 	private Boolean estado;
 	private Double costo;
 	
-	@PrePersist
+	@PrePersist 
 	public void prePersist() {
 		fechaingreso = new Date();
 	}

@@ -33,33 +33,30 @@ public class VehiculoDTO {
 	
 	 public static List<VehiculoDTO> getInstanceList(List<Vehiculo> vehiculo) {
 	    	List<VehiculoDTO> dtos = new ArrayList<>();
-	    	try {
-	    		for (Vehiculo vehicu : vehiculo) {
-		    		VehiculoDTO dto = new VehiculoDTO();
-		    		dto.setPlacavehiculo(vehicu.getPlacavehiculo());
-		    		dto.setTipovehiculo(vehicu.getTipovehiculo());
-		    		dto.setFechaingreso(vehicu.getFechaingreso());	
-		    		dtos.add(dto);
-				}
-			} catch (Exception e) {
-				System.err.println(e);
+	
+    		for (Vehiculo vehicu : vehiculo) {
+	    		VehiculoDTO dto = new VehiculoDTO();
+	    		dto.setPlacavehiculo(vehicu.getPlacavehiculo());
+	    		dto.setTipovehiculo(vehicu.getTipovehiculo());
+	    		dto.setFechaingreso(vehicu.getFechaingreso());	
+	    		dtos.add(dto);
 			}
+	
 	    	return dtos;
 	    }
 	
     public static VehiculoDTO getInstance(Vehiculo vehiculo) {
+    	
     	VehiculoDTO dto = new VehiculoDTO();
-    	try {
-    		dto.setPlacavehiculo(vehiculo.getPlacavehiculo());
-    		dto.setTipovehiculo(vehiculo.getTipovehiculo());
-    		dto.setFechaingreso(vehiculo.getFechaingreso());
-		} catch (Exception e) {
-			System.err.println(e);
-		}
+ 
+		dto.setPlacavehiculo(vehiculo.getPlacavehiculo());
+		dto.setTipovehiculo(vehiculo.getTipovehiculo());
+		dto.setFechaingreso(vehiculo.getFechaingreso());
+
+		
     	return dto;
+    	
     }
-
-
 
 
 	public String getPlacavehiculo() {
