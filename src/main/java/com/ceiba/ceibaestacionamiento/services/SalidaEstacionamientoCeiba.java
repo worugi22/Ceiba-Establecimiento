@@ -23,7 +23,7 @@ public class SalidaEstacionamientoCeiba {
 		return cantidadCarros < NUMERO_MAX_CARROS;
 	}
 	
-	public Boolean isCantidadMotos(Integer cantidadMotos) {
+	public boolean isCantidadMotos(Integer cantidadMotos) {
 		return cantidadMotos < NUMERO_MAX_MOTOS;
 	}
 	

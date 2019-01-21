@@ -25,7 +25,7 @@ public class TiempoTranscurrido {
 	Calendar calendar = GregorianCalendar.getInstance();
 	
 	
-	public Integer calcualarHorasAndDias() {
+	public long calcualarHorasAndDias() {
 //		fechaIngreso = vehiculo.getFechaingreso();
 //		vehiculo.setFechasalida(fechaSalida);
 //		//calendar.

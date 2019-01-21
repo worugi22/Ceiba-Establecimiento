@@ -13,7 +13,7 @@ public class RegistrarVehiculoDTO {
 	
 	private String placavehiculo;
 	private String tipovehiculo;
-	private Integer cilindrajavehiculo;
+	private long cilindrajavehiculo;
 	
 	public RegistrarVehiculoDTO() {
 	}
@@ -60,12 +60,12 @@ public class RegistrarVehiculoDTO {
 	}
 
 
-	public Integer getCilindrajavehiculo() {
+	public long getCilindrajavehiculo() {
 		return cilindrajavehiculo;
 	}
 
 
-	public void setCilindrajavehiculo(Integer cilindrajavehiculo) {
+	public void setCilindrajavehiculo(long cilindrajavehiculo) {
 		this.cilindrajavehiculo = cilindrajavehiculo;
 	}
 	  

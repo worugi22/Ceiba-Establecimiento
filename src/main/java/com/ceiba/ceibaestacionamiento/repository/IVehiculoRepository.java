@@ -18,7 +18,7 @@ import com.ceiba.ceibaestacionamiento.model.Vehiculo;
 public interface IVehiculoRepository extends JpaRepository<Vehiculo, Serializable>{
 	
 	List<Vehiculo> findByTipovehiculoAndEstado(String tipovehiculo, Boolean estado);
-	List<Vehiculo> findByEstado(Boolean estado);
+	List<Vehiculo> findByEstado(boolean estado);
 	Vehiculo findByPlacavehiculoAndEstado(String placavehiculo, Boolean estado);
-	
+
 }

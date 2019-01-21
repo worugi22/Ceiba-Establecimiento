@@ -30,21 +30,21 @@ public class VehiculoService{
 
 	//Tipos de vehiculos que pueden ingresar.
 	static final String CARRO = "carro";
-	static final Integer MAX_CARRO = 20;
+	static final long MAX_CARRO = 20;
 	static final String MOTO = "moto";
-	static final Integer MAX_MOTO = 10;
+	static final long MAX_MOTO = 10;
 	
-	static final Integer DOMINGO = 1;
-	static final Integer LUNES = 2;
-	static final Integer MARTES = 3;
-	static final Integer MIERCOLES = 4;
-	static final Integer JUEVES = 5;
-	static final Integer VIERNES = 6;
-	static final Integer SABADO = 7;
+	static final long DOMINGO = 1;
+	static final long LUNES = 2;
+	static final long MARTES = 3;
+	static final long MIERCOLES = 4;
+	static final long JUEVES = 5;
+	static final long VIERNES = 6;
+	static final long SABADO = 7;
 
 	Date now = new Date();
     Calendar calendar = Calendar.getInstance();
-    int dia = calendar.get(Calendar.DAY_OF_WEEK);
+    long dia = calendar.get(Calendar.DAY_OF_WEEK);
     
     private boolean isDiferentede(String incialPlaca) {
     	return !(vehiculo.getPlacavehiculo().toLowerCase().startsWith(incialPlaca));
@@ -60,7 +60,7 @@ public class VehiculoService{
 		return value;
 	}
 	
-	public List<Vehiculo> findByTipovehiculoAndEstado(String tipovehiculo, Boolean estado) {
+	public List<Vehiculo> findByTipovehiculoAndEstado(String tipovehiculo, boolean estado) {
 		return vehiculoRepository.findByTipovehiculoAndEstado(tipovehiculo,estado);
 	}
  
@@ -90,17 +90,22 @@ public class VehiculoService{
 	
 	//*** Servicio para consultar todos los vehiculos estacionados.
 	@Transactional(readOnly = true)
-	public List<VehiculoDTO> consultarVehiculosEstacionados(Boolean estado) {
+	public List<VehiculoDTO> consultarVehiculosEstacionados(boolean estado) {
 		List<Vehiculo> vehiculos = vehiculoRepository.findByEstado(estado);
 		return VehiculoDTO.getInstanceList(vehiculos);
 	}
 	
 	//*** Servicio retiro de vehiculo.
 	@Transactional(readOnly = true) 
-	public Vehiculo consultarVehiculoEstacionado(String placavehidulo, Boolean estado) {
+	public Vehiculo consultarVehiculoEstacionado(String placavehidulo, boolean estado) {
 		return vehiculoRepository.findByPlacavehiculoAndEstado(placavehidulo, estado);
 	}
 	
+	//*** Servicio retiro de vehiculo.
+	@Transactional() 
+	public Vehiculo save(Vehiculo vehiculo) {
+		return vehiculoRepository.save(vehiculo);
+	}
 
 	
 	// Business Logic

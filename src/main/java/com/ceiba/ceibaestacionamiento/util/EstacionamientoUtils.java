@@ -14,7 +14,7 @@ public final class EstacionamientoUtils {
 	
 
 	
-	public static Boolean buscarCaraterInicial(String placa, String incialPlaca) {
+	public static boolean buscarCaraterInicial(String placa, String incialPlaca) {
 		if(placa.toLowerCase().startsWith(incialPlaca))
 			return Boolean.TRUE;
 		else
@@ -29,7 +29,7 @@ public final class EstacionamientoUtils {
 		forFechaIngreso.setTime(fechaIngreso);
 		forFechaSalida.setTime(fechaSalida);
 		
-		Double horasPasadas = (double) ((forFechaSalida.getTimeInMillis() - forFechaIngreso.getTimeInMillis())/1000/60/60);
+		Double horasPasadas = ((double) (forFechaSalida.getTimeInMillis() - forFechaIngreso.getTimeInMillis())/1000/60/60);
 		
 		return (long) Math.ceil(horasPasadas);
 	}
