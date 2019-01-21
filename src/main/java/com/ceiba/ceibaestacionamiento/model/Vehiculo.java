@@ -30,7 +30,7 @@ public class Vehiculo implements Serializable{
 	
 	private String placavehiculo;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	//@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaingreso;
 	
 	private Date fechasalida;
@@ -116,7 +116,21 @@ public class Vehiculo implements Serializable{
 	public void setCosto(Double costo) {
 		this.costo = costo;
 	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "Vehiculo [idvehiculo=" + idvehiculo + ", placavehiculo=" + placavehiculo + ", fechaingreso="
+				+ fechaingreso + ", fechasalida=" + fechasalida + ", cilindrajevehiculo=" + cilindrajevehiculo
+				+ ", idestacionamiento=" + idestacionamiento + ", tipovehiculo=" + tipovehiculo + ", estado=" + estado
+				+ ", costo=" + costo + "]";
+	}
+
+	
 
 	private static final long serialVersionUID = 1L;
+
+	
 
 }

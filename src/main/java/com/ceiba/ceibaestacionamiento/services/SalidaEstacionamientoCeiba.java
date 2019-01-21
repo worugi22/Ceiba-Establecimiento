@@ -28,17 +28,18 @@ public class SalidaEstacionamientoCeiba {
 	}
 	
 	
-	public Double calcularPrecioCarro(Integer elapsedTime, Integer elapsedDay) {
+	public static double calcularPrecioCarro(long horas, long dias) {
 		
-		Double precio = null;
-		Double relacionHorasMaxHoras =  (double) (elapsedTime/MAX_HORA_POR_HORA);
+		double precio;
+		double factor =   (double)horas/MAX_HORA_POR_HORA;
 		
-		if(elapsedTime < 9 && elapsedDay == 0) {
-			precio = (double) (elapsedTime * PRECIO_X_HORA_CARRO);	
+		
+		if(horas <= MAX_HORA_POR_HORA && dias == 0) {
+			precio = (double) (horas * PRECIO_X_HORA_CARRO);	
 		}else {
-			precio = ((relacionHorasMaxHoras) * PRECIO_X_DIA_CARRO) + (elapsedDay * PRECIO_X_DIA_CARRO);
-			if(elapsedTime < 9)
-				precio += elapsedTime * PRECIO_X_HORA_CARRO; 
+			precio = (Math.floor(factor) * PRECIO_X_DIA_CARRO) + (dias * PRECIO_X_DIA_CARRO);
+			if(horas <= MAX_HORA_POR_HORA)
+				precio += horas * PRECIO_X_HORA_CARRO; 
 		}
 		
 		return precio;
@@ -46,17 +47,17 @@ public class SalidaEstacionamientoCeiba {
 	} 
 	
 
-	public Double calcularPrecioMoto(Integer elapsedTime, Integer elapsedDay, Integer cilindraje) {
+	public static double calcularPrecioMoto(long horas, long dias, long cilindraje) {
 		
-		Double precio;
+		double precio;
 		
-		if(elapsedDay > 0) {
-			precio = (double) (elapsedDay * PRECIO_X_DIA_MOTO);
-			if(elapsedTime > 0) {
-				precio += elapsedTime * PRECIO_X_HORA_MOTO;
+		if(dias > 0) {
+			precio = (double) (dias * PRECIO_X_DIA_MOTO);
+			if(horas > 0) {
+				precio += horas * PRECIO_X_HORA_MOTO;
 			}
 		}else {
-			precio = (double) (elapsedTime * PRECIO_X_HORA_MOTO);
+			precio = (double) (horas * PRECIO_X_HORA_MOTO);
 		}
 		if(cilindraje > CILINDRAJE_MAYOR_A)
 			precio += PRECIO_X_CILINDRAJE_MAYOR_500;
