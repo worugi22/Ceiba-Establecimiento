@@ -24,11 +24,10 @@ import com.ceiba.ceibaestacionamiento.model.Vehiculo;
 @Service
 public class VehiculoService{
 	
-	@Autowired // Inyectar el Repository.
+	@Autowired 
 	private IVehiculoRepository vehiculoRepository;
 	Vehiculo vehiculo;
 
-	//Tipos de vehiculos que pueden ingresar.
 	static final String CARRO = "carro";
 	static final long MAX_CARRO = 20;
 	static final String MOTO = "moto";
@@ -65,7 +64,6 @@ public class VehiculoService{
 	}
  
 	
-	//*** Servicio para registrar vehiculo validados.
 	@Transactional
 	public Vehiculo registrarVehiculo(Vehiculo vehiculo) {
 		if(findByTipovehiculoAndEstado(CARRO,true).size() < 20 && vehiculo.getTipovehiculo().equals(CARRO)) 
@@ -75,7 +73,7 @@ public class VehiculoService{
 		return null;
 	}
 	
-	//*** Servicio para registrar vehiculo validados.
+
 	@Transactional
 	public RegistrarVehiculoDTO registrarVehiculoRest(Vehiculo vehiculo) {
 			Vehiculo vehiculoToDTO = vehiculoRepository.save(vehiculo);
@@ -88,20 +86,19 @@ public class VehiculoService{
 			return null;
 	}
 	
-	//*** Servicio para consultar todos los vehiculos estacionados.
 	@Transactional(readOnly = true)
 	public List<VehiculoDTO> consultarVehiculosEstacionados(boolean estado) {
 		List<Vehiculo> vehiculos = vehiculoRepository.findByEstado(estado);
 		return VehiculoDTO.getInstanceList(vehiculos);
 	}
 	
-	//*** Servicio retiro de vehiculo.
 	@Transactional(readOnly = true) 
 	public Vehiculo consultarVehiculoEstacionado(String placavehidulo, boolean estado) {
+		
+		
 		return vehiculoRepository.findByPlacavehiculoAndEstado(placavehidulo, estado);
 	}
 	
-	//*** Servicio retiro de vehiculo.
 	@Transactional() 
 	public Vehiculo save(Vehiculo vehiculo) {
 		return vehiculoRepository.save(vehiculo);

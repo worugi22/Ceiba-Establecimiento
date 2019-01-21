@@ -12,8 +12,6 @@ import javax.persistence.Id;
 
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  * @author wolsey.rubio
@@ -34,7 +32,7 @@ public class Vehiculo implements Serializable{
 	private Date fechaingreso;
 	
 	private Date fechasalida;
-	private Integer cilindrajevehiculo;
+	private long cilindrajevehiculo;
 	private Integer idestacionamiento;
 	private String tipovehiculo;
 	private Boolean estado;
@@ -77,11 +75,11 @@ public class Vehiculo implements Serializable{
 		this.fechasalida = fechasalida;
 	}
 
-	public Integer getCilindrajevehiculo() {
+	public long getCilindrajevehiculo() {
 		return cilindrajevehiculo;
 	}
 
-	public void setCilindrajevehiculo(Integer cilindrajevehiculo) {
+	public void setCilindrajevehiculo(long cilindrajevehiculo) {
 		this.cilindrajevehiculo = cilindrajevehiculo;
 	}
 

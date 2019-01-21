@@ -62,43 +62,41 @@ public class VehiculoRestController {
 	@PostMapping("/vehiculo/registrar") // Registrar un vehiculo ingreso vehiculo.
 	@ResponseStatus(HttpStatus.CREATED)
 	public RegistrarVehiculoDTO create(@RequestBody Vehiculo vehiculo) {
-		if(vehiculoService.findByTipovehiculoAndEstado(CARRO,true).size() < 20 && vehiculo.getTipovehiculo().equals("carro")) 
+		if(vehiculoService.findByTipovehiculoAndEstado(CARRO,true).size() < 20 && vehiculo.getTipovehiculo().equals(CARRO)) 
 			return vehiculoService.registrarVehiculoRest(vehiculo);
-		if(vehiculoService.findByTipovehiculoAndEstado(MOTO,true).size() < 10 && vehiculo.getTipovehiculo().equals("moto")) 
+		if(vehiculoService.findByTipovehiculoAndEstado(MOTO,true).size() < 10 && vehiculo.getTipovehiculo().equals(MOTO)) 
 			return vehiculoService.registrarVehiculoRest(vehiculo);
 		return null;
 	}
 	
-	
-	// Se registra la salida del vehiculo
+
 	@PutMapping("/vehiculo/salida/{placavehiculo}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Vehiculo update(@RequestBody Vehiculo vehiculo, @PathVariable String placavehiculo) {
 		Vehiculo vehiculoActual = this.vehiculoService.consultarVehiculoEstacionado(placavehiculo, REGISTRADO);
 
-		// Se genera fecha de salida.
+		
 		Date fechaSalida = new Date();
 		vehiculoActual.setFechasalida(fechaSalida);
 		
-		// Se trae la fechas de ingreso de la base de datos.
+	
 		Date fechaIngreso = vehiculoActual.getFechaingreso();
 		
-		// Se calculan las horas y dias que duró parquedo.
+	
 		long horas = EstacionamientoUtils.calcularHoras(fechaIngreso, fechaSalida);
-		System.out.println(horas);
 		long dias = EstacionamientoUtils.calcularHoras(fechaIngreso, fechaSalida)/24;
 		
-		// Se calcula el costo segun el tipo de vehiculo y sus requerimientos.
+		
 		String tipoVehiculo = vehiculoActual.getTipovehiculo();
 		double costo = 0;
-		Integer cilindrajeVehiculo;
-		cilindrajeVehiculo = vehiculo.getCilindrajevehiculo();
-		
+		long cilindrajeVehiculo;
+		cilindrajeVehiculo = vehiculoActual.getCilindrajevehiculo();
+
 		switch(tipoVehiculo) {
-		  case "carro":
+		  case CARRO:
 			  costo = SalidaEstacionamientoCeiba.calcularPrecioCarro(horas, dias);
 		    break;
-		  case "moto":
+		  case MOTO:
 			  costo = SalidaEstacionamientoCeiba.calcularPrecioMoto(horas, dias, cilindrajeVehiculo);
 		    break;
 		  default:

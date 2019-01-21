@@ -59,9 +59,10 @@ public class SalidaEstacionamientoCeiba {
 		}else {
 			precio = (double) (horas * PRECIO_X_HORA_MOTO);
 		}
-		if(cilindraje > CILINDRAJE_MAYOR_A)
-			precio += PRECIO_X_CILINDRAJE_MAYOR_500;
 		
+		if(cilindraje > PRECIO_X_HORA_MOTO) {
+			precio = precio + PRECIO_X_CILINDRAJE_MAYOR_500;
+		}
 		return precio;
 		
 	} 
