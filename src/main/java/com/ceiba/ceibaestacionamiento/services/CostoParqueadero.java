@@ -6,7 +6,7 @@ package com.ceiba.ceibaestacionamiento.services;
  * @author wolsey.rubio
  *
  */
-public class SalidaEstacionamientoCeiba {
+public class CostoParqueadero {
 	
 	static final Integer NUMERO_MAX_CARROS = 20;
 	static final Integer PRECIO_X_HORA_CARRO = 1000;
@@ -18,16 +18,14 @@ public class SalidaEstacionamientoCeiba {
 	static final Integer PRECIO_X_DIA_MOTO = 4000;
 	static final Integer CILINDRAJE_MAYOR_A = 500;
 	static final Integer PRECIO_X_CILINDRAJE_MAYOR_500 = 2000;
+
 	
-	public Boolean isCantidadCarros(Integer cantidadCarros) {
-		return cantidadCarros < NUMERO_MAX_CARROS;
+	
+	private CostoParqueadero() {
+		super();
 	}
-	
-	public boolean isCantidadMotos(Integer cantidadMotos) {
-		return cantidadMotos < NUMERO_MAX_MOTOS;
-	}
-	
-	
+
+
 	public static double calcularPrecioCarro(long horas, long dias) {
 		
 		double precio;

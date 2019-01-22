@@ -5,20 +5,16 @@ import java.util.Date;
 
 public final class EstacionamientoUtils {
 	
-	
-	
-	//Tipos de vehiculos que pueden ingresar.
 	static final String CARRO = "carro";
 	static final String MOTO = "moto";
 	static final String LETRA_INICIAL_PLACA = "a";
 	
-	public static boolean buscarCaraterInicial(String placa, String incialPlaca) {
-		if(placa.toLowerCase().startsWith(incialPlaca))
-			return Boolean.TRUE;
-		else
-			return Boolean.FALSE;
-	}
 	
+	
+	private EstacionamientoUtils() {
+		super();
+	}
+
 	public static long calcularHoras(Date fechaIngreso, Date fechaSalida) {
 		
 		Calendar forFechaIngreso = Calendar.getInstance();
@@ -32,14 +28,4 @@ public final class EstacionamientoUtils {
 		return (long) Math.ceil(horasPasadas);
 	}
 	
-	public static boolean validarPlacaLetraDia(String placa, String tipoVehiculo) {
-		
-		if(tipoVehiculo == CARRO && buscarCaraterInicial(placa,LETRA_INICIAL_PLACA))
-			return Boolean.TRUE;
-		if(tipoVehiculo == MOTO && buscarCaraterInicial(placa,LETRA_INICIAL_PLACA))
-			return Boolean.TRUE;
-		
-		return Boolean.FALSE;
-	}
-
 }

@@ -3,7 +3,6 @@
  */
 package com.ceiba.ceibaestacionamiento.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ceiba.ceibaestacionamiento.dto.RegistrarVehiculoDTO;
 import com.ceiba.ceibaestacionamiento.dto.VehiculoDTO;
 import com.ceiba.ceibaestacionamiento.model.Vehiculo;
-import com.ceiba.ceibaestacionamiento.services.SalidaEstacionamientoCeiba;
 import com.ceiba.ceibaestacionamiento.services.VehiculoService;
-import com.ceiba.ceibaestacionamiento.util.EstacionamientoUtils;
 
 /**
  * @author wolsey.rubio

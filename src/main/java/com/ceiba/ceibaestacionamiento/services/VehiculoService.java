@@ -64,6 +64,7 @@ public class VehiculoService {
 		return vehiculoRepository.findByTipovehiculoAndEstado(tipoVehiuclo,true).size() < capacida && vehiculo.getTipovehiculo().equals(tipoVehiuclo);
 	}
 	
+	@Transactional
 	public Vehiculo salida(String placavehiculo) {
 		Vehiculo vehiculoActual = this.consultarVehiculoEstacionado(placavehiculo, true);		
 		Date fechaSalida = new Date();
@@ -84,10 +85,10 @@ public class VehiculoService {
 
 		switch(tipoVehiculo) {
 		  case CARRO:
-			  costo = SalidaEstacionamientoCeiba.calcularPrecioCarro(horas, dias);
+			  costo = CostoParqueadero.calcularPrecioCarro(horas, dias);
 		    break;
 		  case MOTO:
-			  costo = SalidaEstacionamientoCeiba.calcularPrecioMoto(horas, dias, cilindrajeVehiculo);
+			  costo = CostoParqueadero.calcularPrecioMoto(horas, dias, cilindrajeVehiculo);
 		    break;
 		  default:
 		}
@@ -132,7 +133,6 @@ public class VehiculoService {
 	public Vehiculo registrarSalidaVehiculo(Vehiculo vehiculoActual) {
 		return vehiculoRepository.save(vehiculo);
 	}
-	
 	
 	@Transactional
 	public Vehiculo registrarVehiculo(Vehiculo vehiculo) {
