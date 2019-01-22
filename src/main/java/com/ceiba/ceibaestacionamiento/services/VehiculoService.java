@@ -47,16 +47,13 @@ public class VehiculoService {
     Calendar calendar = Calendar.getInstance();
     long diaActual = calendar.get(Calendar.DAY_OF_WEEK);
     
-    public boolean isPrimeraLetraPlaca(String placa, String incialPlaca) {
-    	return (placa.toLowerCase().startsWith(incialPlaca));
-	}
     public boolean isValidoDiaPlaca(Vehiculo vehiculo) {
     	boolean value = true;
-    	if((isPrimeraLetraPlaca(vehiculo.getPlacavehiculo(), LETRA_INICIAL_PLACA)))
+    	if(vehiculo.getPlacavehiculo().toLowerCase().startsWith(LETRA_INICIAL_PLACA) )
     		value = (diaActual == LUNES || diaActual == DOMINGO);
     	return  value;
 	}
-		
+
     public boolean isVehiculoEstacionado(Vehiculo vehiculo) {
     	return (vehiculoRepository.findByPlacavehiculo(vehiculo.getPlacavehiculo().toLowerCase()));
 	}
