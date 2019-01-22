@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ceiba.ceibaestacionamiento.costoparqueaderotest;
+package com.ceiba.ceibaestacionamiento.test.services;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import com.ceiba.ceibaestacionamiento.services.SalidaEstacionamientoCeiba;

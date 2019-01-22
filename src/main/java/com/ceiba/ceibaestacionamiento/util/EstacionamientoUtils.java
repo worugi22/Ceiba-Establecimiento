@@ -12,8 +12,6 @@ public final class EstacionamientoUtils {
 	static final String MOTO = "moto";
 	static final String LETRA_INICIAL_PLACA = "a";
 	
-
-	
 	public static boolean buscarCaraterInicial(String placa, String incialPlaca) {
 		if(placa.toLowerCase().startsWith(incialPlaca))
 			return Boolean.TRUE;
