@@ -47,18 +47,47 @@ public class VehiculoService {
     Calendar calendar = Calendar.getInstance();
     long diaActual = calendar.get(Calendar.DAY_OF_WEEK);
     
-    public boolean isValidoDiaPlaca(Vehiculo vehiculo) {
+    public boolean isValidoDiaPlaca(String placaVehiculo) {
     	boolean value = true;
-    	if(vehiculo.getPlacavehiculo().toLowerCase().startsWith(LETRA_INICIAL_PLACA) )
+    	if(placaVehiculo.toLowerCase().startsWith(LETRA_INICIAL_PLACA) )
     		value = (diaActual == LUNES || diaActual == DOMINGO);
     	return  value;
 	}
 
-    public boolean isVehiculoEstacionado(Vehiculo vehiculo) {
-    	return (vehiculoRepository.findByPlacavehiculo(vehiculo.getPlacavehiculo().toLowerCase()));
+	public boolean isCapacidadVehiculoTipoVehiculo(String tipoVehiucloPermitido, String tipoVehiculoIngresado,long capacida) {
+		return vehiculoRepository.findByTipovehiculoAndEstado(tipoVehiculoIngresado,true).size() < capacida && tipoVehiucloPermitido.equals(tipoVehiculoIngresado);
 	}
-	public boolean isCapacidadVehiculoTipoVehiculo(Vehiculo vehiculo, String tipoVehiuclo,long capacida) {
-		return vehiculoRepository.findByTipovehiculoAndEstado(tipoVehiuclo,true).size() < capacida && vehiculo.getTipovehiculo().equals(tipoVehiuclo);
+	
+	@Transactional
+	public RegistrarVehiculoDTO registrarIngresoVehiculoRest(Vehiculo vehiculo) {
+		
+		Vehiculo vehiculoToDTO;
+		
+		if(isCapacidadVehiculoTipoVehiculo(vehiculo.getTipovehiculo(),CARRO,MAX_CARRO) && isValidoDiaPlaca(vehiculo.getPlacavehiculo()) ) {
+			vehiculoToDTO = vehiculoRepository.save(vehiculo);
+			return RegistrarVehiculoDTO.getInstance(vehiculoToDTO);
+		}
+		if(isCapacidadVehiculoTipoVehiculo(vehiculo.getTipovehiculo(),MOTO,MAX_MOTO) && isValidoDiaPlaca(vehiculo.getPlacavehiculo()) ) {
+			vehiculoToDTO = vehiculoRepository.save(vehiculo);
+			return RegistrarVehiculoDTO.getInstance(vehiculoToDTO);
+		}
+		return null;
+	}
+	
+	@Transactional(readOnly = true) 
+	public Vehiculo consultarVehiculoEstacionado(String placavehidulo, boolean estado) {
+		return vehiculoRepository.findByPlacavehiculoAndEstado(placavehidulo, estado);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<VehiculoDTO> consultarVehiculosEstacionados() {
+		List<Vehiculo> vehiculos = vehiculoRepository.findByEstado(true);
+		return VehiculoDTO.getInstanceList(vehiculos);
+	}
+	
+	@Transactional
+	public Vehiculo registrarVehiculo(Vehiculo vehiculo) {
+		return vehiculoRepository.save(vehiculo);
 	}
 	
 	@Transactional
@@ -66,11 +95,9 @@ public class VehiculoService {
 		Vehiculo vehiculoActual = this.consultarVehiculoEstacionado(placavehiculo, true);		
 		Date fechaSalida = new Date();
 		vehiculoActual.setFechasalida(fechaSalida);
-		
 	
 		Date fechaIngreso = vehiculoActual.getFechaingreso();
 		
-	
 		long horas = EstacionamientoUtils.calcularHoras(fechaIngreso, fechaSalida);
 		long dias = EstacionamientoUtils.calcularHoras(fechaIngreso, fechaSalida)/24;
 		
@@ -96,59 +123,6 @@ public class VehiculoService {
 		this.registrarVehiculo(vehiculoActual);
 		return vehiculoActual;
 	}
-	
-	
-	@Transactional
-	public RegistrarVehiculoDTO registrarIngresoVehiculoRest(Vehiculo vehiculo) {
-		
-		Vehiculo vehiculoToDTO;
-		
-		if(isCapacidadVehiculoTipoVehiculo(vehiculo,CARRO,MAX_CARRO) && isValidoDiaPlaca(vehiculo) ) {
-			vehiculoToDTO = vehiculoRepository.save(vehiculo);
-			return RegistrarVehiculoDTO.getInstance(vehiculoToDTO);
-		}
-		if(isCapacidadVehiculoTipoVehiculo(vehiculo,MOTO,MAX_MOTO) && isValidoDiaPlaca(vehiculo) ) {
-			vehiculoToDTO = vehiculoRepository.save(vehiculo);
-			return RegistrarVehiculoDTO.getInstance(vehiculoToDTO);
-		}
-		return null;
-	}
-	
-	
-	@Transactional(readOnly = true) 
-	public Vehiculo consultarVehiculoEstacionado(String placavehidulo, boolean estado) {
-		return vehiculoRepository.findByPlacavehiculoAndEstado(placavehidulo, estado);
-	}
-	
-	@Transactional(readOnly = true)
-	public List<VehiculoDTO> consultarVehiculosEstacionados(boolean estado) {
-		List<Vehiculo> vehiculos = vehiculoRepository.findByEstado(estado);
-		return VehiculoDTO.getInstanceList(vehiculos);
-	}
-	
-	@Transactional
-	public Vehiculo registrarSalidaVehiculo(Vehiculo vehiculoActual) {
-		return vehiculoRepository.save(vehiculo);
-	}
-	
-	@Transactional
-	public Vehiculo registrarVehiculo(Vehiculo vehiculo) {
-		return vehiculoRepository.save(vehiculo);
-	}
-	
-	@Transactional()
-	public List<Vehiculo> findByTipovehiculoAndEstado(String tipovehiculo, boolean estado) {
-		return vehiculoRepository.findByTipovehiculoAndEstado(tipovehiculo,estado);
-	}
-	
-	@Transactional() 
-	public Vehiculo save(Vehiculo vehiculo) {
-		return vehiculoRepository.save(vehiculo);
-	}
 
 	
-	
-
-
-
 }

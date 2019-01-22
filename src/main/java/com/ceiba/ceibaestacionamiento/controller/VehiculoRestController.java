@@ -31,8 +31,6 @@ import com.ceiba.ceibaestacionamiento.services.VehiculoService;
 @RequestMapping("/estacionamiento")
 public class VehiculoRestController {
 	
-	
-	
 	static final Boolean REGISTRADO = true;
 	static final String CARRO = "carro";
 	static final String MOTO = "moto";
@@ -40,37 +38,23 @@ public class VehiculoRestController {
 	@Autowired 
 	private VehiculoService vehiculoService;
 	
-	
-	@GetMapping("/parqueados") 
-	@ResponseStatus(HttpStatus.OK)
-	public List<VehiculoDTO> show(){
-		return vehiculoService.consultarVehiculosEstacionados(REGISTRADO);
-	}
-	
-	@GetMapping("/parqueado/{placavehiculo}") 
-	@ResponseStatus(HttpStatus.OK)
-	public Vehiculo show(@PathVariable String placavehiculo){
-		return vehiculoService.consultarVehiculoEstacionado(placavehiculo, REGISTRADO);
-	}
-	
-	
 	@PostMapping("/ingreso")
 	@ResponseStatus(HttpStatus.CREATED)
 	public RegistrarVehiculoDTO create(@RequestBody Vehiculo vehiculo) {
 		return vehiculoService.registrarIngresoVehiculoRest(vehiculo);
 	}
 	
-
+	@GetMapping("/parqueados") 
+	@ResponseStatus(HttpStatus.OK)
+	public List<VehiculoDTO> show(){
+		return vehiculoService.consultarVehiculosEstacionados();
+	}
+	
 	@PutMapping("/salida/{placavehiculo}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Vehiculo actualizarPrecioVehiculo(@RequestBody Vehiculo vehiculo, @PathVariable String placavehiculo) {
-		
 		return vehiculoService.salida(placavehiculo);
-		
 	}	
-	
-	
-	
 	
 }
 
