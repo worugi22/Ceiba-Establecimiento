@@ -54,8 +54,12 @@ public class VehiculoService {
     	return  value;
 	}
 
-	public boolean isCapacidadVehiculoTipoVehiculo(String tipoVehiucloPermitido, String tipoVehiculoIngresado,long capacida) {
-		return vehiculoRepository.findByTipovehiculoAndEstado(tipoVehiculoIngresado,true).size() < capacida && tipoVehiucloPermitido.equals(tipoVehiculoIngresado);
+	public boolean isCapacidadVehiculo(List<Vehiculo> vehiculo, long capacidad, String tipoVehiculo) {
+		return vehiculo.size() < capacidad;
+	}
+	
+	public boolean isTipoVehiculo(String tipoVehiculoIngresado, String tipoVehiculoPermitido) {
+		return tipoVehiculoIngresado.equals(tipoVehiculoPermitido);
 	}
 	
 	@Transactional
@@ -63,14 +67,16 @@ public class VehiculoService {
 		
 		Vehiculo vehiculoToDTO;
 		
-		if(isCapacidadVehiculoTipoVehiculo(vehiculo.getTipovehiculo(),CARRO,MAX_CARRO) && isValidoDiaPlaca(vehiculo.getPlacavehiculo()) ) {
+		if(isCapacidadVehiculo(vehiculoRepository.findByTipovehiculoAndEstado(CARRO,true),MAX_CARRO,CARRO) && isTipoVehiculo(vehiculo.getTipovehiculo(),CARRO) && isValidoDiaPlaca(vehiculo.getPlacavehiculo()) ) {
 			vehiculoToDTO = vehiculoRepository.save(vehiculo);
 			return RegistrarVehiculoDTO.getInstance(vehiculoToDTO);
 		}
-		if(isCapacidadVehiculoTipoVehiculo(vehiculo.getTipovehiculo(),MOTO,MAX_MOTO) && isValidoDiaPlaca(vehiculo.getPlacavehiculo()) ) {
+		
+		if(isCapacidadVehiculo(vehiculoRepository.findByTipovehiculoAndEstado(MOTO,true),MAX_MOTO,MOTO) && isTipoVehiculo(vehiculo.getTipovehiculo(),MOTO) && isValidoDiaPlaca(vehiculo.getPlacavehiculo()) ) {
 			vehiculoToDTO = vehiculoRepository.save(vehiculo);
 			return RegistrarVehiculoDTO.getInstance(vehiculoToDTO);
 		}
+		
 		return null;
 	}
 	
@@ -91,8 +97,10 @@ public class VehiculoService {
 	}
 	
 	@Transactional
-	public Vehiculo salida(String placavehiculo) {
+	public Vehiculo registrarSalidaVehiculo(String placavehiculo) {
+		
 		Vehiculo vehiculoActual = this.consultarVehiculoEstacionado(placavehiculo, true);		
+		
 		Date fechaSalida = new Date();
 		vehiculoActual.setFechasalida(fechaSalida);
 	

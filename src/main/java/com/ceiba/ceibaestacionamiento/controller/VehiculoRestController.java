@@ -39,7 +39,7 @@ public class VehiculoRestController {
 	private VehiculoService vehiculoService;
 	
 	@PostMapping("/ingreso")
-	@ResponseStatus(HttpStatus.CREATED)
+	@ResponseStatus(HttpStatus.ACCEPTED)
 	public RegistrarVehiculoDTO create(@RequestBody Vehiculo vehiculo) {
 		return vehiculoService.registrarIngresoVehiculoRest(vehiculo);
 	}
@@ -51,9 +51,9 @@ public class VehiculoRestController {
 	}
 	
 	@PutMapping("/salida/{placavehiculo}")
-	@ResponseStatus(HttpStatus.CREATED)
+	@ResponseStatus(HttpStatus.OK)
 	public Vehiculo actualizarPrecioVehiculo(@RequestBody Vehiculo vehiculo, @PathVariable String placavehiculo) {
-		return vehiculoService.salida(placavehiculo);
+		return vehiculoService.registrarSalidaVehiculo(placavehiculo);
 	}	
 	
 }
