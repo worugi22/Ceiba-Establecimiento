@@ -35,26 +35,36 @@ public class VehiculoService {
 	
 	static final String LETRA_INICIAL_PLACA = "a";
 	
-	static final long DOMINGO = 1;
-	static final long LUNES = 2;
-	static final long MARTES = 3;
-	static final long MIERCOLES = 4;
-	static final long JUEVES = 5;
-	static final long VIERNES = 6;
-	static final long SABADO = 7;
-	
-	Date now = new Date();
-    Calendar calendar = Calendar.getInstance();
-    long diaActual = calendar.get(Calendar.DAY_OF_WEEK);
+	static final int DOMINGO = 1;
+	static final int LUNES = 2;
+	static final int MARTES = 3;
+	static final int MIERCOLES = 4;
+	static final int JUEVES = 5;
+	static final int VIERNES = 6;
+	static final int SABADO = 7;
+		
+    public int getDiaActual() {
+        Calendar calendar = Calendar.getInstance();
+		return calendar.get(Calendar.DAY_OF_WEEK);
+    }
+    
+    
+    public boolean isVehiculoDiaHabil(int diaActual) {
+    	return (diaActual == LUNES || diaActual == DOMINGO);
+    }
+    
+    public boolean placaIniciaConLetra(String placaVehiculo) {
+    	return placaVehiculo.toLowerCase().startsWith(LETRA_INICIAL_PLACA);
+    }
     
     public boolean isValidoDiaPlaca(String placaVehiculo) {
     	boolean value = true;
-    	if(placaVehiculo.toLowerCase().startsWith(LETRA_INICIAL_PLACA) )
-    		value = (diaActual == LUNES || diaActual == DOMINGO);
+    	if( placaIniciaConLetra(placaVehiculo))
+    		value = isVehiculoDiaHabil(getDiaActual());
     	return  value;
 	}
 
-	public boolean isCapacidadVehiculo(List<Vehiculo> vehiculo, long capacidad, String tipoVehiculo) {
+	public boolean isCapacidadVehiculo(List<Vehiculo> vehiculo, long capacidad) {
 		return vehiculo.size() < capacidad;
 	}
 	
@@ -67,12 +77,12 @@ public class VehiculoService {
 		
 		Vehiculo vehiculoToDTO;
 		
-		if(isCapacidadVehiculo(vehiculoRepository.findByTipovehiculoAndEstado(CARRO,true),MAX_CARRO,CARRO) && isTipoVehiculo(vehiculo.getTipovehiculo(),CARRO) && isValidoDiaPlaca(vehiculo.getPlacavehiculo()) ) {
+		if(isCapacidadVehiculo(vehiculoRepository.findByTipovehiculoAndEstado(CARRO,true),MAX_CARRO) && isTipoVehiculo(vehiculo.getTipovehiculo(),CARRO) && isValidoDiaPlaca(vehiculo.getPlacavehiculo()) ) {
 			vehiculoToDTO = vehiculoRepository.save(vehiculo);
 			return RegistrarVehiculoDTO.getInstance(vehiculoToDTO);
 		}
 		
-		if(isCapacidadVehiculo(vehiculoRepository.findByTipovehiculoAndEstado(MOTO,true),MAX_MOTO,MOTO) && isTipoVehiculo(vehiculo.getTipovehiculo(),MOTO) && isValidoDiaPlaca(vehiculo.getPlacavehiculo()) ) {
+		if(isCapacidadVehiculo(vehiculoRepository.findByTipovehiculoAndEstado(MOTO,true),MAX_MOTO) && isTipoVehiculo(vehiculo.getTipovehiculo(),MOTO) && isValidoDiaPlaca(vehiculo.getPlacavehiculo()) ) {
 			vehiculoToDTO = vehiculoRepository.save(vehiculo);
 			return RegistrarVehiculoDTO.getInstance(vehiculoToDTO);
 		}
